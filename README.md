@@ -1,2 +1,2 @@
 # UdonChips-fork
-Fork of UdonChips
+Fork of UdonChips (https://lura.booth.pm/items/3060394).
