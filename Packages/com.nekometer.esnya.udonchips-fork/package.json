@@ -2,6 +2,7 @@
     "name": "com.nekometer.esnya.udonchips-fork",
     "displayName": "UdonChips",
     "description": "UdonChips is a common standard for \"in-world currency\" that can be used in VRChat.",
+    "version": "1.0.2",
     "author": {
         "name": "esnya"
     },
