@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonChipsInstantShop_ToggleActive
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e752ae28fa1303f45af7bae0d10c2654,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 66d2ac505d356644b82e45fa0739e03d,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -23,7 +23,6 @@ MonoBehaviour:
   hasInteractEvent: 1
   scriptID: 2115283793359914853
   serializationData:
-    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 

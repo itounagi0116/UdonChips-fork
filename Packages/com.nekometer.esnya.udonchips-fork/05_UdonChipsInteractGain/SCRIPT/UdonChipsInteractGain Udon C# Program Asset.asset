@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: UdonChipsInteractGain Udon C# Program Asset
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: c896a909411005a47a851ccb1984af0b,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: a7defa871ea13b54394ac14fc75c4bac,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -23,7 +23,6 @@ MonoBehaviour:
   hasInteractEvent: 1
   scriptID: -4933993982965465147
   serializationData:
-    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 

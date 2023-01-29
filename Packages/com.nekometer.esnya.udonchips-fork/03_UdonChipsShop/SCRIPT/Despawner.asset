@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: Despawner
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: e9a0822e903618846bc1f7063f0bfa65,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 854f981cba407944d98ce4e5c25e4b27,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -23,7 +23,6 @@ MonoBehaviour:
   hasInteractEvent: 0
   scriptID: -548962200457494835
   serializationData:
-    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
