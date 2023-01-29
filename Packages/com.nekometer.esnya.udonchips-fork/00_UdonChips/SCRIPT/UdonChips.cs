@@ -11,5 +11,11 @@ namespace UCS
 		public float money = 1000;
 
 		public string format = "$ {0:F0}";
+
+		public static UdonChips GetInstance()
+		{
+			var o = GameObject.Find(nameof(UdonChips));
+			return o ? o.GetComponent<UdonChips>() : null;
+		}
 	}
 }
