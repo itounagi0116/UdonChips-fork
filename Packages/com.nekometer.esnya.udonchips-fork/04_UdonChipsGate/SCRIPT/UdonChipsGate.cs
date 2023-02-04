@@ -1,114 +1,118 @@
 ﻿
+using UCS;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using UCS;
 
-public class UdonChipsGate : UdonSharpBehaviour
+namespace UCS
 {
-    [Header("----------------------System-------------------------")]
-    [SerializeField] private Animator animator;
-    [SerializeField] AudioSource audioSourcePass;
-    [SerializeField] AudioSource audioSourceError;
-    [SerializeField] GameObject colliderObject;
-    private UdonChips udonChips;
-
-    [Space(20)]
-    [Header("----------------------Money-------------------------")]
-    [SerializeField] private float fee = 100;
-    [SerializeField] private bool firstTimeOnly = false;
-    private bool isFirstTime = true;
-
-    void Start()
+    [UdonBehaviourSyncMode(BehaviourSyncMode.NoVariableSync)]
+    public class UdonChipsGate : UdonSharpBehaviour
     {
-        udonChips = GameObject.Find("UdonChips").GetComponent<UdonChips>();
-    }
+        [Header("----------------------System-------------------------")]
+        [SerializeField] private Animator animator;
+        [SerializeField] AudioSource audioSourcePass;
+        [SerializeField] AudioSource audioSourceError;
+        [SerializeField] GameObject colliderObject;
+        private UdonChips udonChips;
 
-    public override void OnPlayerTriggerEnter(VRCPlayerApi player)
-    {
-        if (Networking.LocalPlayer.Equals(player))
+        [Space(20)]
+        [Header("----------------------Money-------------------------")]
+        [SerializeField] private float fee = 100;
+        [SerializeField] private bool firstTimeOnly = false;
+        private bool isFirstTime = true;
+
+        void Start()
         {
-            if (firstTimeOnly)
+            udonChips = UdonChips.GetInstance();
+        }
+
+        public override void OnPlayerTriggerEnter(VRCPlayerApi player)
+        {
+            if (Networking.LocalPlayer.Equals(player))
             {
-                if (isFirstTime)
+                if (firstTimeOnly)
+                {
+                    if (isFirstTime)
+                    {
+                        EnterGate();
+                        if (udonChips.money >= fee)
+                        {
+                            isFirstTime = false;
+                        }
+                    }
+                    return;
+                }
+                else
                 {
                     EnterGate();
-                    if (udonChips.money >= fee)
-                    {
-                        isFirstTime = false;
-                    }
                 }
-                return;
+
             }
-            else
+        }
+
+        public override void OnPlayerTriggerExit(VRCPlayerApi player)
+        {
+            if (Networking.LocalPlayer.Equals(player))
             {
-                EnterGate();
+                if (!firstTimeOnly)
+                {
+                    colliderObject.SetActive(true);
+                }
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "GateEnd");
             }
-
         }
-    }
 
-    public override void OnPlayerTriggerExit(VRCPlayerApi player)
-    {
-        if (Networking.LocalPlayer.Equals(player))
+        public void EnterGate()
         {
-            if (!firstTimeOnly)
+            if (udonChips.money < fee)
             {
-                colliderObject.SetActive(true);
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "GateError");
             }
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "GateEnd");
-        }
-    }
 
-    public void EnterGate()
-    {
-        if (udonChips.money < fee)
-        {
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "GateError");
+            if (udonChips.money >= fee)
+            {
+                SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "GatePass");
+                udonChips.money = udonChips.money - fee;
+                colliderObject.SetActive(false);
+            }
         }
 
-        if (udonChips.money >= fee)
+        public void GateError()
         {
-            SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "GatePass");
-            udonChips.money = udonChips.money - fee;
-            colliderObject.SetActive(false);
-        }
-    }
+            if (animator != null)
+            {
+                animator.SetInteger("GateParm", 2);
+            }
 
-    public void GateError()
-    {
-        if (animator != null)
-        {
-            animator.SetInteger("GateParm", 2);
+            if (audioSourceError != null)
+            {
+                audioSourceError.Play();
+            }
         }
 
-        if (audioSourceError != null)
+        public void GatePass()
         {
-            audioSourceError.Play();
-        }
-    }
+            if (animator != null)
+            {
+                animator.SetInteger("GateParm", 1);
+            }
 
-    public void GatePass()
-    {
-        if (animator != null)
-        {
-            animator.SetInteger("GateParm", 1);
+            if (audioSourcePass != null)
+            {
+                audioSourcePass.Play();
+            }
         }
 
-        if (audioSourcePass != null)
+        public void GateEnd()
         {
-            audioSourcePass.Play();
-        }
-    }
+            if (animator != null)
+            {
+                animator.SetInteger("GateParm", 0);
+            }
 
-    public void GateEnd()
-    {
-        if (animator != null)
-        {
-            animator.SetInteger("GateParm", 0);
         }
 
     }
-
 }

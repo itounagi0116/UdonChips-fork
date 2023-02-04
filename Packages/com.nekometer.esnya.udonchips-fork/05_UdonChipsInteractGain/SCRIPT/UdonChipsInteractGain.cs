@@ -3,36 +3,39 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using UCS;
 
-public class UdonChipsInteractGain : UdonSharpBehaviour
+namespace UCS
 {
-    [Header("----------------------System-------------------------")]
-    [SerializeField] private AudioSource audioSource_ButtonHit;
-    private UdonChips udonChips;
-    [Space(20)]
-    [Header("----------------------Reward-------------------------")]
-    [SerializeField] private float moneyReward = 0.2f;
-
-
-    void Start()
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    public class UdonChipsInteractGain : UdonSharpBehaviour
     {
-        udonChips = GameObject.Find("UdonChips").GetComponent<UdonChips>();
-    }
+        [Header("----------------------System-------------------------")]
+        [SerializeField] private AudioSource audioSource_ButtonHit;
+        private UdonChips udonChips;
+        [Space(20)]
+        [Header("----------------------Reward-------------------------")]
+        [SerializeField] private float moneyReward = 0.2f;
 
-    public override void Interact()
-    {
-        ButtonPush();
-    }
 
-
-    private void ButtonPush()
-    {
-        udonChips.money = udonChips.money + moneyReward;
-
-        if (audioSource_ButtonHit != null)
+        void Start()
         {
-            audioSource_ButtonHit.Play();
+            udonChips = UdonChips.GetInstance();
+        }
+
+        public override void Interact()
+        {
+            ButtonPush();
+        }
+
+
+        private void ButtonPush()
+        {
+            udonChips.money = udonChips.money + moneyReward;
+
+            if (audioSource_ButtonHit != null)
+            {
+                audioSource_ButtonHit.Play();
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using VRC.Udon;
 
 namespace UCS
 {
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UdonChips : UdonSharpBehaviour
 	{
 		[Tooltip("現在の所持金（初期所持金）")]
