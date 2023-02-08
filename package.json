@@ -1,4 +1,5 @@
 {
+  "name": "udonchips-fork",
   "version": "1.0.2",
   "workspaces": [
     "Packages/*"
