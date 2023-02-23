@@ -3,23 +3,26 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using UCS;
 
-public class UdonChipsAutoGain : UdonSharpBehaviour
+namespace UCS
 {
-    private UdonChips udonChips;
-    [SerializeField] float gainPerSec = 0.1f;
-    [SerializeField] float gainMax = 100000;
-    void Start()
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    public class UdonChipsAutoGain : UdonSharpBehaviour
     {
-        udonChips = GameObject.Find("UdonChips").GetComponent<UdonChips>();
-    }
-
-    private void Update()
-    {
-        if (udonChips.money <= gainMax)
+        private UdonChips udonChips;
+        [SerializeField] float gainPerSec = 0.1f;
+        [SerializeField] float gainMax = 100000;
+        void Start()
         {
-            udonChips.money += gainPerSec * Time.deltaTime;
+            udonChips = UdonChips.GetInstance();
+        }
+
+        private void Update()
+        {
+            if (udonChips.money <= gainMax)
+            {
+                udonChips.money += gainPerSec * Time.deltaTime;
+            }
         }
     }
 }
