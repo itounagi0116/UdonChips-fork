@@ -1,8 +1,11 @@
 # UdonChips-fork
-Fork of UdonChips (https://lura.booth.pm/items/3060394).
 
-## Getting Started
-1. Setup Unity Project using VRChat Creator Companion with UdonSharp
-2. Open PackageManager window from Window menu.
-3. Click + button on the left top of window.
-4. Input `git+https://github.com/esnya/UdonChips-fork?path=Packages/com.nekometer.esnya.udonchips-fork` and press Add button.
+![ライセンスバッジ](https://img.shields.io/badge/ライセンス-MIT-007EC6)
+
+UdonChips（[こちら](https://lura.booth.pm/items/3060394)）のフォークバージョンです。
+
+## はじめに  
+1. UdonSharpを使用してVRChat Creator CompanionでUnityプロジェクトをセットアップします。  
+2. Unityの「Window」メニューから「PackageManager」ウィンドウを開きます。  
+3. ウィンドウの左上にある「+」ボタンをクリックします。  
+4. `git+https://github.com/esnya/UdonChips-fork?path=Packages/com.nekometer.esnya.udonchips-fork` を入力し、「Add」ボタンを押します。  
